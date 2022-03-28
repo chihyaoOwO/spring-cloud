@@ -52,4 +52,20 @@ public class PaymentController {
             log.info("*********services = " + service);
         }
     }
+
+    @GetMapping("/payment/get/{id}")
+    public CommonResult<Payment> getPaymentById2(@PathVariable("id") String id) {
+        Payment payment = new Payment();
+        payment.setPayment_id(id);
+        if (payment != null) {
+            return new CommonResult<>(200, "success, serverPort : "+serverPort, payment);
+        } else {
+            return new CommonResult<>(444, "failed");
+        }
+    }
+
+    @GetMapping("/payment/lb")
+    public String getPaymentLB(){
+        return serverPort;
+    }
 }
